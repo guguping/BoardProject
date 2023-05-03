@@ -43,4 +43,8 @@ public class BoardRepository {
     public List<BoardDTO> searchContents(BoardDTO boardDTO) {
         return sql.selectList("Board.searchContents",boardDTO);
     }
+
+    public void updateHits(Long id) {
+        sql.update("Board.updateHits",id);
+    }
 }

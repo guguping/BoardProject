@@ -45,4 +45,8 @@ public class BoardService {
     public List<BoardDTO> searchContents(BoardDTO boardDTO) {
         return boardRepository.searchContents(boardDTO);
     }
+
+    public void updateHits(Long id) {
+        boardRepository.updateHits(id);
+    }
 }

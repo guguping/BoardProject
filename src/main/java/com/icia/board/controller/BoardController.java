@@ -33,6 +33,7 @@ public class BoardController {
     }
     @GetMapping
     public String boardDetail(@RequestParam("id") Long id , Model model){
+        boardService.updateHits(id);
         BoardDTO boardDTO = boardService.boardDetail(id);
         model.addAttribute("boardDTO",boardDTO);
         return "boardPages/boardDetail";
