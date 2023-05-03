@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header>
+    <h2>내가만든 Board</h2>
+</header>
+<nav>
+    <ul>
+        <li style="display: inline-block;list-style-type: none"><a href="/board/save" style="text-decoration: none">글작성</a></li>
+        <li style="display: inline-block;list-style-type: none"><a href="/board/" style="text-decoration: none">글목록</a>
+        </li>
+    </ul>
+</nav>
+<section>
+    <div>
+        <h2>나는야 세이브</h2>
+        <form action="/board/save" method="post">
+            <table>
+                <tr>
+                    <th><label for="boardWriter">작성자:</label></th>
+                    <td><input type="text" id="boardWriter" name="boardWriter"></td>
+                    <th><label for="boardPass">글비밀번호:</label></th>
+                    <td><input type="text" id="boardPass" name="boardPass"></td>
+                    <th><label for="boardTitle">글제목</label></th>
+                    <td><input type="text" id="boardTitle" name="boardTitle"></td>
+                <tr>
+                    <th><label for="boardContents">내용</label></th>
+                    <td colspan="5"><textarea id="boardContents" name="boardContents"></textarea></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" style="display: inline" value="등록">
+                        <input type="button" style="display: inline" value="취소" onclick="goindex()">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</section>
+<footer>
+    <div id="footer">
+
+    </div>
+</footer>
+</body>
+<script>
+    const date = new Date();
+    const footer = document.getElementById('footer');
+    footer.innerHTML = "<p>&copy"+date.getFullYear() + "&nbsp;HRDKOREA All rights reserved."
+</script>
+</html>

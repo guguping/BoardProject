@@ -1,0 +1,31 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+header{
+    height: 10%;
+    width: 100%;
+    background-color: yellow;
+}
+nav{
+    height: 5%;
+    width: 100%;
+    background-color: violet;
+}
+nav ul li a{
+    color: white;
+}
+nav ul li:hover {
+    background: black;
+}
+section {
+    display: flex;
+    height: 80%;
+    width: 100%;
+    background: khaki;
+}
+footer{
+    height: 5%;
+    width: 100%;
+    background-color: violet;
+}
