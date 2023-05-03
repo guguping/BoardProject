@@ -5,29 +5,82 @@ import com.icia.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
+@RequestMapping("/board") // 공통 주소값으로 설정
 public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    @GetMapping("/board/save")
+    @GetMapping("/save") // /board/save
     public String BoardSave(){
         return "boardPages/boardSave";
     }
 
-    @PostMapping("/board/save")
+    @PostMapping("/save") // /board/save
     public String BoardSave(@ModelAttribute BoardDTO boardDTO){
         boardService.BoardSave(boardDTO);
         return "redirect:/board/";
     }
 
-    @GetMapping("/board/")
+    @GetMapping("/") // /bard/
     public String BoardList(Model model){
         model.addAttribute("bList",boardService.BoardList());
+        return "boardPages/boardList";
+    }
+    @GetMapping
+    public String boardDetail(@RequestParam("id") Long id , Model model){
+        BoardDTO boardDTO = boardService.boardDetail(id);
+        model.addAttribute("boardDTO",boardDTO);
+        return "boardPages/boardDetail";
+    }
+    @GetMapping("/update")
+    public String boardUpdate(@RequestParam("id") Long id , Model model){
+        BoardDTO boardDTO = boardService.boardDetail(id);
+        model.addAttribute("boardDTO",boardDTO);
+        return "boardPages/boardUpdate";
+    }
+    @PostMapping("/update")
+    public String update(@ModelAttribute BoardDTO boardDTO){
+        System.out.println("boardDTO = " + boardDTO);
+        boardService.update(boardDTO);
+        return "redirect:/board?id="+boardDTO.getId();
+    }
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Long id , Model model){
+        BoardDTO boardDTO = boardService.boardDetail(id);
+        model.addAttribute("boardDTO",boardDTO);
+        return "boardPages/boardDelete";
+    }
+    @PostMapping("/delete")
+    public String delete(@RequestParam("id") Long id){
+        boardService.delete(id);
+        return "redirect:/board/";
+    }
+    @GetMapping("/searchList")
+    public String search(@RequestParam("Title") String Title ,
+                       @RequestParam("Writer") String Writer ,
+                       @RequestParam("Contents") String Contents,
+                         Model model){
+        BoardDTO boardDTO = new BoardDTO();
+        System.out.println("Title = " + Title + ", Writer = " + Writer + ", Contents = " + Contents);
+        if(Writer.equals("boardWriter")&&Contents.equals("boardContents")){
+            boardDTO.setBoardTitle(Title);
+            List<BoardDTO> bList = boardService.searchTitle(boardDTO);
+            model.addAttribute("bList",bList);
+        }else if(Title.equals("boardTitle")&&Contents.equals("boardContents")){
+            boardDTO.setBoardWriter(Writer);
+            List<BoardDTO> bList = boardService.searchWriter(boardDTO);
+            model.addAttribute("bList",bList);
+        }else{
+            boardDTO.setBoardContents(Contents);
+            List<BoardDTO> bList = boardService.searchContents(boardDTO);
+            model.addAttribute("bList",bList);
+        }
+        System.out.println(boardDTO);
         return "boardPages/boardList";
     }
 }

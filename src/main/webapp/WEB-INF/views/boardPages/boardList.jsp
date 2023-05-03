@@ -27,16 +27,50 @@
             </tr>
             <c:forEach items="${bList}" var="s">
                 <tr>
-                    <td>${s.id}</td>
-                    <td>${s.boardTitle}</td>
-                    <td>${s.boardWriter}</td>
-                    <td>${s.boardCreateDate}</td>
+                    <td><a href="/board?id=${s.id}">${s.id}</a></td>
+                    <td><a href="/board?id=${s.id}">${s.boardTitle}</a></td>
+                    <td><a href="/board?id=${s.id}">${s.boardWriter}</a></td>
+                    <td><a href="/board?id=${s.id}">${s.boardCreateDate}</a></td>
                 </tr>
             </c:forEach>
+            <tr>
+                <td colspan="6">
+                    <select id="optionResult">
+                        <option value="">선택해주세요</option>
+                        <option value="boardTitle" id="boardTitle">제목</option>
+                        <option value="boardWriter" id="boardWriter">작성자</option>
+                        <option value="boardContents" id="boardContents">내용</option>
+                    </select>
+                    <input type="text" placeholder="입력" id="searchResult">
+                    <input type="button" value="검색" onclick="search()">
+                </td>
+            </tr>
         </table>
         <a href="/" style="text-decoration: none">index이동</a>
     </div>
 </section>
 <%@include file="../component/footer.jsp" %>
 </body>
+<script>
+    const search = () =>{
+        const optionResult = document.getElementById('optionResult');
+        const searchResult = document.getElementById('searchResult');
+        const Title = document.getElementById('boardTitle');
+        const Writer = document.getElementById('boardWriter');
+        const Contents = document.getElementById('boardContents');
+        if (optionResult.value == "boardTitle"){
+            Title.value = searchResult.value;
+            console.log("Title,"+Title.value);
+            location.href ="/board/searchList?Title="+Title.value+"&Writer="+Writer.value+"&Contents="+Contents.value;
+        }else if (optionResult.value == "boardWriter"){
+            Writer.value = searchResult.value;
+            console.log("Writer,"+Writer.value);
+            location.href ="/board/searchList?Writer="+Writer.value+"&Title="+Title.value+"&Contents="+Contents.value;
+        }else if(optionResult.value == "boardContents"){
+            Contents.value = searchResult.value;
+            console.log("Contents,"+Contents.value);
+            location.href ="/board/searchList?Contents="+Contents.value+"&Writer="+Writer.value+"&Title="+Title.value;
+        }
+    }
+</script>
 </html>

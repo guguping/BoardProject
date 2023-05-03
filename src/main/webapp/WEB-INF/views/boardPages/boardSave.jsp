@@ -20,6 +20,7 @@
         <form action="/board/save" method="post">
             <table>
                 <tr>
+                    <th></th>
                     <th><label for="boardWriter">작성자:</label></th>
                     <td><input type="text" id="boardWriter" name="boardWriter"></td>
                     <th><label for="boardPass">글비밀번호:</label> </th>
@@ -28,10 +29,10 @@
                     <td><input type="text" id="boardTitle" name="boardTitle"></td>
                 <tr>
                     <th><label for="boardContents">내용</label></th>
-                    <td colspan="5"><textarea id="boardContents" name="boardContents"></textarea></td>
+                    <td colspan="6"><textarea id="boardContents" name="boardContents" COLS="102" ROWS="40"></textarea></td>
                 </tr>
                 <tr>
-                    <td>
+                    <td colspan="6">
                         <input type="submit" style="display: inline" value="등록">
                         <input type="button" style="display: inline" value="취소" onclick="goindex()">
                     </td>
