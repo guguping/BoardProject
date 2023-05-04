@@ -1,6 +1,7 @@
 package com.icia.board.repository;
 
 import com.icia.board.dto.BoardDTO;
+import com.icia.board.dto.BoardFileDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,8 +13,11 @@ public class BoardRepository {
     @Autowired
     private SqlSessionTemplate sql;
 
-    public void BoardSave(BoardDTO boardDTO) {
+    public BoardDTO BoardSave(BoardDTO boardDTO) {
+        System.out.println("boardDTO전 = " + boardDTO);
         sql.insert("Board.Save",boardDTO);
+        System.out.println("boardDTO후 = " + boardDTO);
+        return boardDTO;
     }
 
     public List<BoardDTO> BoardList() {
@@ -46,5 +50,9 @@ public class BoardRepository {
 
     public void updateHits(Long id) {
         sql.update("Board.updateHits",id);
+    }
+
+    public void saveFile(BoardFileDTO boardFileDTO) {
+        sql.insert("Board.saveFile",boardFileDTO);
     }
 }

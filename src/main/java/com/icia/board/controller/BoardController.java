@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -21,7 +22,7 @@ public class BoardController {
     }
 
     @PostMapping("/save") // /board/save
-    public String BoardSave(@ModelAttribute BoardDTO boardDTO){
+    public String BoardSave(@ModelAttribute BoardDTO boardDTO) throws IOException {
         System.out.println("boardDTO = " + boardDTO);
         boardService.BoardSave(boardDTO);
         return "redirect:/board/";

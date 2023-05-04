@@ -17,4 +17,5 @@ public class BoardDTO {
     Timestamp boardCreateDate;
     int boardHits = 0;
     MultipartFile boardFile;
+    int fileAttached = 0;
 }

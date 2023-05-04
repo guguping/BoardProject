@@ -27,11 +27,13 @@
                     <th><label for="boardTitle">글제목</label>
                         <input type="text" id="boardTitle" name="boardTitle"></th>
                 <tr>
-                    <th colspan="6"><label for="boardContents">내용</label></th>
+                    <th colspan="6"><label for="boardContents">내용</label>
+                        <label for="boardFile" style="float: right">업로드</label>>
+                        <input type="file" id="boardFile" name="boardFile" style="display: none"></th>
                 </tr>
                 <tr>
                     <td colspan="6"><textarea id="boardContents" name="boardContents" COLS="104" ROWS="40"></textarea>
-                    <input type="file" value="파일첨부"></td>
+                    </td>
                 </tr>
                 <tr>
                     <th colspan="6">
@@ -47,7 +49,7 @@
 </body>
 <script>
     const goindex = () => {
-      location.href = "/";
+        location.href = "/";
     }
 </script>
 </html>

@@ -55,3 +55,9 @@ public class BoardDTO {
 }
 ```
 #### 받아온 파일을 DTO에 받아줄거라면 MultipartFile타입의 필드가 필요하다
+
+useGeneratedKeys="true" = 자동으로 생성되는 값이 있을때 
+keyProperty="id" = 해당 컬럼 이름
+
+#### BoardSave메소드 전체 수정 Controller , Service , Repository , Mapper , mybatis
+#### 전체 싹다 수정함

@@ -4,9 +4,13 @@
 
 
 <mapper namespace="Board">
-<insert id="Save" parameterType="board">
-    insert into board_table(boardWriter,boardPass,boardTitle,boardContents)
-        value(#{boardWriter},#{boardPass},#{boardTitle},#{boardContents})
+<insert id="Save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
+    insert into board_table(boardWriter,boardPass,boardTitle,boardContents,fileAttached)
+        value(#{boardWriter},#{boardPass},#{boardTitle},#{boardContents},#{fileAttached})
+</insert>
+<insert id="saveFile" parameterType="boardFile">
+    insert into board_file_table(originalFileName,storedFileName,boardId)
+        values (#{originalFileName},#{storedFileName},#{boardId})
 </insert>
 <select id="List" resultType="board">
     select * from board_table
