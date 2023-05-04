@@ -15,7 +15,7 @@
     select * from board_table where id = #{id}
 </select>
 <update id="update" parameterType="board">
-    update board_table set boardTitle = #{boardTitle} , boardContents = #{boardContents} , boardCreateDate = boardCreateDate where id = #{id}
+    update board_table set boardTitle = #{boardTitle} , boardContents = #{boardContents} where id = #{id}
 </update>
 <update id="updateHits" parameterType="Long">
     update board_table set boardHits=boardHits+1 where id=#{id}

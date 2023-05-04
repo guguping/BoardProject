@@ -22,5 +22,17 @@ select * from board_table;
 
 ## 52일차
 ### ing
+```sql
+drop table if exists board_file_table;
+create table board_file_table(
+id bigint primary key auto_increment,
+originalFileName varchar(100),
+storedFileName varchar(100),
+boardId bigint,
+constraint fk_board_file foreign key (boardId) references board_table(id)
+);
+```
+### 조회수 증가 만듬 detail
+
 
 

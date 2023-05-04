@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -17,24 +18,33 @@
 <%@include file="../component/nav.jsp" %>
 <section>
     <div>
-        <h2>boardList</h2>
+        <h2 style="text-align: center">boardList</h2>
         <table>
             <tr>
                 <th>글번호</th>
                 <th>제목</th>
                 <th>작성자</th>
                 <th>작성시간</th>
+                <th>조회수</th>
             </tr>
             <c:forEach items="${bList}" var="s">
                 <tr>
-                    <td><a href="/board?id=${s.id}">${s.id}</a></td>
-                    <td><a href="/board?id=${s.id}">${s.boardTitle}</a></td>
-                    <td><a href="/board?id=${s.id}">${s.boardWriter}</a></td>
-                    <td><a href="/board?id=${s.id}">${s.boardCreateDate}</a></td>
+                    <td style="border: 1px solid black;text-align: center;padding: 5px">
+                        <a style="text-decoration: none;color: black" href="/board?id=${s.id}">${s.id}</a></td>
+                    <td style="border: 1px solid black;text-align: center;padding: 5px">
+                        <a style="text-decoration: none;color: black" href="/board?id=${s.id}">${s.boardTitle}</a></td>
+                    <td style="border: 1px solid black;text-align: center;padding: 5px">
+                        <a style="text-decoration: none;color: black" href="/board?id=${s.id}">${s.boardWriter}</a></td>
+                    <td style="border: 1px solid black;text-align: center;padding: 5px">
+                        <a style="text-decoration: none;color: black" href="/board?id=${s.id}">
+                            <fmt:formatDate value="${s.boardCreateDate}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate>
+                        </a></td>
+                    <td style="border: 1px solid black;text-align: center;padding: 5px">
+                        <a STYLE="text-decoration: none;color: black">${s.boardHits}</a></td>
                 </tr>
             </c:forEach>
             <tr>
-                <td colspan="6">
+                <td colspan="6" style="padding: 5px;text-align: center">
                     <select id="optionResult">
                         <option value="">선택해주세요</option>
                         <option value="boardTitle" id="boardTitle">제목</option>
@@ -52,24 +62,24 @@
 <%@include file="../component/footer.jsp" %>
 </body>
 <script>
-    const search = () =>{
+    const search = () => {
         const optionResult = document.getElementById('optionResult');
         const searchResult = document.getElementById('searchResult');
         const Title = document.getElementById('boardTitle');
         const Writer = document.getElementById('boardWriter');
         const Contents = document.getElementById('boardContents');
-        if (optionResult.value == "boardTitle"){
+        if (optionResult.value == "boardTitle") {
             Title.value = searchResult.value;
-            console.log("Title,"+Title.value);
-            location.href ="/board/searchList?Title="+Title.value+"&Writer="+Writer.value+"&Contents="+Contents.value;
-        }else if (optionResult.value == "boardWriter"){
+            console.log("Title," + Title.value);
+            location.href = "/board/searchList?Title=" + Title.value + "&Writer=" + Writer.value + "&Contents=" + Contents.value;
+        } else if (optionResult.value == "boardWriter") {
             Writer.value = searchResult.value;
-            console.log("Writer,"+Writer.value);
-            location.href ="/board/searchList?Writer="+Writer.value+"&Title="+Title.value+"&Contents="+Contents.value;
-        }else if(optionResult.value == "boardContents"){
+            console.log("Writer," + Writer.value);
+            location.href = "/board/searchList?Writer=" + Writer.value + "&Title=" + Title.value + "&Contents=" + Contents.value;
+        } else if (optionResult.value == "boardContents") {
             Contents.value = searchResult.value;
-            console.log("Contents,"+Contents.value);
-            location.href ="/board/searchList?Contents="+Contents.value+"&Writer="+Writer.value+"&Title="+Title.value;
+            console.log("Contents," + Contents.value);
+            location.href = "/board/searchList?Contents=" + Contents.value + "&Writer=" + Writer.value + "&Title=" + Title.value;
         }
     }
 </script>

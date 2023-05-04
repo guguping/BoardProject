@@ -3,29 +3,59 @@
     margin: 0;
 }
 header{
+    display: flex;
+    justify-content: center;
     height: 10%;
     width: 100%;
     background-color: yellow;
+
+}
+header h2 {
+    padding-top: 28px;
 }
 nav{
     height: 5%;
     width: 100%;
     background-color: violet;
 }
-nav ul li a{
+nav ul {
+    list-style-type: none;
+    overflow: hidden;
+}
+nav ul li {
+    float: left;
+}
+nav ul li a {
+    display: inline-block;
+    padding: 13px;
+    text-decoration: none;
     color: white;
 }
-nav ul li:hover {
-    background: black;
+nav ul li a:hover {
+    color: white;
+    background-color: cadetblue;
 }
 section {
     display: flex;
+    justify-content: center;
     height: 80%;
     width: 100%;
     background: khaki;
 }
 footer{
+    display: flex;
+    justify-content: center;
     height: 5%;
     width: 100%;
     background-color: violet;
+}
+footer div{
+    padding-top: 12px;
+}
+table {
+    margin: auto;
+    border: 1px solid black;
+}
+table tr th {
+    border: 1px solid black;
 }

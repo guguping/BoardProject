@@ -45,10 +45,11 @@ public class BoardController {
         return "boardPages/boardUpdate";
     }
     @PostMapping("/update")
-    public String update(@ModelAttribute BoardDTO boardDTO){
-        System.out.println("boardDTO = " + boardDTO);
+    public String update(@ModelAttribute BoardDTO boardDTO,Model model){
         boardService.update(boardDTO);
-        return "redirect:/board?id="+boardDTO.getId();
+        BoardDTO dto = boardService.boardDetail(boardDTO.getId());
+        model.addAttribute("boardDTO",dto);
+        return "boardPages/boardDetail";
     }
     @GetMapping("/delete")
     public String delete(@RequestParam("id") Long id , Model model){

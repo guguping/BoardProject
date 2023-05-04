@@ -16,26 +16,27 @@
 <%@include file="../component/nav.jsp" %>
 <section>
     <div>
-        <h2>나는야 세이브</h2>
+        <h2 style="text-align: center;">나는야 세이브</h2>
         <form action="/board/save" method="post">
             <table>
                 <tr>
-                    <th></th>
-                    <th><label for="boardWriter">작성자:</label></th>
-                    <td><input type="text" id="boardWriter" name="boardWriter"></td>
-                    <th><label for="boardPass">글비밀번호:</label> </th>
-                    <td><input type="text" id="boardPass" name="boardPass"></td>
-                    <th><label for="boardTitle">글제목</label></th>
-                    <td><input type="text" id="boardTitle" name="boardTitle"></td>
+                    <th><label for="boardWriter">작성자:</label>
+                        <input type="text" id="boardWriter" name="boardWriter"></th>
+                    <th><label for="boardPass">글비밀번호:</label>
+                        <input type="text" id="boardPass" name="boardPass"></th>
+                    <th><label for="boardTitle">글제목</label>
+                        <input type="text" id="boardTitle" name="boardTitle"></th>
                 <tr>
-                    <th><label for="boardContents">내용</label></th>
-                    <td colspan="6"><textarea id="boardContents" name="boardContents" COLS="102" ROWS="40"></textarea></td>
+                    <th colspan="6"><label for="boardContents">내용</label></th>
                 </tr>
                 <tr>
-                    <td colspan="6">
+                    <td colspan="6"><textarea id="boardContents" name="boardContents" COLS="104" ROWS="40"></textarea></td>
+                </tr>
+                <tr>
+                    <th colspan="6">
                         <input type="submit" style="display: inline" value="등록">
                         <input type="button" style="display: inline" value="취소" onclick="goindex()">
-                    </td>
+                    </th>
                 </tr>
             </table>
         </form>
