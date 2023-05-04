@@ -10,6 +10,7 @@
 <head>
     <title>boardSave</title>
     <link rel="stylesheet" href="/resources/css/style.css">
+    <script src="//cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
 </head>
 <body>
 <%@include file="../component/header.jsp" %>
@@ -28,8 +29,8 @@
                         <input type="text" id="boardTitle" name="boardTitle"></th>
                 <tr>
                     <th colspan="6"><label for="boardContents">내용</label>
-                        <label for="boardFile" style="float: right">업로드</label>>
-                        <input type="file" id="boardFile" name="boardFile" style="display: none"></th>
+                        <label for="boardFile" style="float: right">업로드</label>
+                        <input type="file" id="boardFile" name="boardFile" multiple style="display: none"></th>
                 </tr>
                 <tr>
                     <td colspan="6"><textarea id="boardContents" name="boardContents" COLS="104" ROWS="40"></textarea>

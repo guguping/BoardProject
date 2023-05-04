@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>boardDetail</title>
@@ -35,9 +36,22 @@
             <th>
                 <fmt:formatDate value="${boardDTO.boardCreateDate}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate>
             </th>
-<%--            <th>${boardDTO.boardCreateDate}</th>--%>
+            <%--            <th>${boardDTO.boardCreateDate}</th>--%>
             <th>${boardDTO.boardHits}</th>
         </tr>
+        <c:if test="${boardDTO.fileAttached == 1}">
+            <tr>
+                <th colspan="6">image</th>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <c:forEach items="${boardFileList}" var="boardFile">
+                        <img src="${pageContext.request.contextPath}/upload/${boardFile.storedFileName}" alt=""
+                             style="width: 100px" ; height="100px">
+                    </c:forEach>
+                </td>
+            </tr>
+        </c:if>
         <tr>
             <td colspan="6"><textarea id="boardContents" name="boardContents"
                                       COLS="104" ROWS="38" readonly>${boardDTO.boardContents}</textarea></td>
@@ -55,10 +69,10 @@
 </body>
 <script>
     const goUpdate = (id) => {
-        location.href = "/board/update?id="+id;
+        location.href = "/board/update?id=" + id;
     }
     const goDelete = (id) => {
-        location.href = "/board/delete?id="+id;
+        location.href = "/board/delete?id=" + id;
     }
     const goList = () => {
         location.href = "/board/";

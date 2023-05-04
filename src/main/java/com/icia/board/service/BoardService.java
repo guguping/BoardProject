@@ -5,6 +5,7 @@ import com.icia.board.dto.BoardFileDTO;
 import com.icia.board.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class BoardService {
 
     public void BoardSave(BoardDTO boardDTO) throws IOException {
         //파일 있음 , 없음 구분
-        if(boardDTO.getBoardFile().isEmpty()) { // isEmpty = 파일이 비었다
+        if (boardDTO.getBoardFile().get(0).isEmpty()) { // isEmpty = 파일이 비었다
             //파일 없음 .
             System.out.println("파일없음");
             boardDTO.setFileAttached(0);
@@ -34,29 +35,32 @@ public class BoardService {
             System.out.println("file on");
             boardDTO.setFileAttached(1);
             BoardDTO dto = boardRepository.BoardSave(boardDTO);
-            // 원본 파일 이름 가져오기
-            String originalFilename = boardDTO.getBoardFile().getOriginalFilename();
-            System.out.println("originalFilename = " + originalFilename);
-            // 저장용 이름 만들기
-            System.out.println(System.currentTimeMillis());
-            // 1970 1월 1일을 기준으로 현재까지의 몇미리초가 지났는지의 값
-            System.out.println(UUID.randomUUID().toString());
-            // 랜덤 난수를 만들어주는 메소드
-            String storedFileName = System.currentTimeMillis() + "-" + originalFilename;
-            System.out.println("storedFileName ="+storedFileName);
-            //저장을 위한 BoardFileDTO 세팅
-            BoardFileDTO boardFileDTO =new BoardFileDTO();
-            boardFileDTO.setOriginalFileName(originalFilename);
-            boardFileDTO.setStoredFileName(storedFileName);
-            boardFileDTO.setBoardId(dto.getId());
-            // 매개변수 DTO가 아닌 리턴받은 dto를 사용해야함
-            //로컬에 파일 저장
-            // 저장할 경로 설정(저장할폴더 + 저장할이름)
-            String savePath="D:\\springframework_img\\"+storedFileName;
-            // 저장처리
-            boardDTO.getBoardFile().transferTo(new File(savePath)); // new File()은 자바에서 제공하는 클래스
-            boardRepository.saveFile(boardFileDTO);
+            for (MultipartFile boardFile : boardDTO.getBoardFile()) {
+                // 원본 파일 이름 가져오기
+                String originalFilename = boardFile.getOriginalFilename();
+                System.out.println("originalFilename = " + originalFilename);
+                // 저장용 이름 만들기
+                System.out.println(System.currentTimeMillis());
+                // 1970 1월 1일을 기준으로 현재까지의 몇미리초가 지났는지의 값
+                System.out.println(UUID.randomUUID().toString());
+                // 랜덤 난수를 만들어주는 메소드
+                String storedFileName = System.currentTimeMillis() + "-" + originalFilename;
+                System.out.println("storedFileName =" + storedFileName);
+                //저장을 위한 BoardFileDTO 세팅
+                BoardFileDTO boardFileDTO = new BoardFileDTO();
+                boardFileDTO.setOriginalFileName(originalFilename);
+                boardFileDTO.setStoredFileName(storedFileName);
+                boardFileDTO.setBoardId(dto.getId());
+                // 매개변수 DTO가 아닌 리턴받은 dto를 사용해야함
+                //로컬에 파일 저장
+                // 저장할 경로 설정(저장할폴더 + 저장할이름)
+                String savePath = "D:\\springframework_img\\" + storedFileName;
+                // 저장처리
+                boardFile.transferTo(new File(savePath)); // new File()은 자바에서 제공하는 클래스
+                boardRepository.saveFile(boardFileDTO);
+            }
         }
+
     }
 
     public List<BoardDTO> BoardList() {
@@ -90,5 +94,9 @@ public class BoardService {
 
     public void updateHits(Long id) {
         boardRepository.updateHits(id);
+    }
+
+    public List<BoardFileDTO> findFile(Long id) {
+        return boardRepository.findFile(id);
     }
 }

@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,6 +17,6 @@ public class BoardDTO {
     String boardContents;
     Timestamp boardCreateDate;
     int boardHits = 0;
-    MultipartFile boardFile;
     int fileAttached = 0;
+    List<MultipartFile> boardFile;
 }
