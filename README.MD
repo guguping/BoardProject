@@ -33,6 +33,25 @@ constraint fk_board_file foreign key (boardId) references board_table(id)
 );
 ```
 ### 조회수 증가 만듬 detail
+### 파일 함께 보내기
+```Html
+<form action="/board/save" method="post" enctype="multipart/form-data">
 
+    <input type="file" name="boardFile" value="파일첨부"></td>
+</form>
+```
+####  enctype="multipart/form-data" 을 꼭붙여주어야합니다
 
-
+```DTO
+public class BoardDTO {
+    Long id;
+    String boardWriter;
+    String boardPass;
+    String boardTitle;
+    String boardContents;
+    Timestamp boardCreateDate;
+    int boardHits = 0;
+    MultipartFile boardFile;
+}
+```
+#### 받아온 파일을 DTO에 받아줄거라면 MultipartFile타입의 필드가 필요하다

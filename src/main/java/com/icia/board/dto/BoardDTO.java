@@ -2,6 +2,8 @@ package com.icia.board.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.sql.Timestamp;
 
 @Data
@@ -14,4 +16,5 @@ public class BoardDTO {
     String boardContents;
     Timestamp boardCreateDate;
     int boardHits = 0;
+    MultipartFile boardFile;
 }

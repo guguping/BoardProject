@@ -17,7 +17,7 @@
 <section>
     <div>
         <h2 style="text-align: center;">나는야 세이브</h2>
-        <form action="/board/save" method="post">
+        <form action="/board/save" method="post" enctype="multipart/form-data">
             <table>
                 <tr>
                     <th><label for="boardWriter">작성자:</label>
@@ -30,7 +30,8 @@
                     <th colspan="6"><label for="boardContents">내용</label></th>
                 </tr>
                 <tr>
-                    <td colspan="6"><textarea id="boardContents" name="boardContents" COLS="104" ROWS="40"></textarea></td>
+                    <td colspan="6"><textarea id="boardContents" name="boardContents" COLS="104" ROWS="40"></textarea>
+                    <input type="file" value="파일첨부"></td>
                 </tr>
                 <tr>
                     <th colspan="6">

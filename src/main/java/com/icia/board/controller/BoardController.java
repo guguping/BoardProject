@@ -22,6 +22,7 @@ public class BoardController {
 
     @PostMapping("/save") // /board/save
     public String BoardSave(@ModelAttribute BoardDTO boardDTO){
+        System.out.println("boardDTO = " + boardDTO);
         boardService.BoardSave(boardDTO);
         return "redirect:/board/";
     }
