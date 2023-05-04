@@ -52,5 +52,10 @@
     const goindex = () => {
         location.href = "/";
     }
+    $(function () {
+        CKEDITOR.replace('boardContents', {
+            filebrowserUploadUrl : '${pageContext.request.contextPath}/adm/fileupload.do'
+        });
+    });
 </script>
 </html>
