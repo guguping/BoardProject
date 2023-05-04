@@ -54,6 +54,17 @@ public class BoardDTO {
     MultipartFile boardFile;
 }
 ```
+```sql
+drop table if exists board_file_table;
+create table board_file_table(
+    id bigint primary key auto_increment,
+    originalFileName varchar(100),
+    storedFileName varchar(100),
+    boardId bigint,
+    constraint fk_board_file foreign key (boardId) references board_table (id) on delete cascade
+);
+select * from board_file_table;
+```
 #### 받아온 파일을 DTO에 받아줄거라면 MultipartFile타입의 필드가 필요하다
 
 useGeneratedKeys="true" = 자동으로 생성되는 값이 있을때 
