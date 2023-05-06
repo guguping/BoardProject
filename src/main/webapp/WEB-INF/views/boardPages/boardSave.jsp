@@ -10,7 +10,6 @@
 <head>
     <title>boardSave</title>
     <link rel="stylesheet" href="/resources/css/style.css">
-    <script src="//cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
 </head>
 <body>
 <%@include file="../component/header.jsp" %>
@@ -52,10 +51,5 @@
     const goindex = () => {
         location.href = "/";
     }
-    $(function () {
-        CKEDITOR.replace('boardContents', {
-            filebrowserUploadUrl : '${pageContext.request.contextPath}/adm/fileupload.do'
-        });
-    });
 </script>
 </html>

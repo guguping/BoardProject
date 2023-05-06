@@ -3,17 +3,19 @@
 
 ```sql
 drop table if exists board_table;
-create table board_table(
-id bigint auto_increment primary key,
-boardWriter varchar(50),
-boardPass varchar(20),
-boardTitle varchar(50),
-boardContents varchar(500),
-boardCreateDate datetime default now(),
-boardHits int
+create table board_table
+(
+    id              bigint auto_increment primary key,
+    boardWriter     varchar(50),
+    boardPass       varchar(20),
+    boardTitle      varchar(50),
+    boardContents   varchar(500),
+    boardCreateDate datetime default now(),
+    boardHits       int      default 0,
+    fileAttached    int      default 0
 );
 
-insert into board_table(boardWriter,boardPass,boardTitle,boardContents) value('아무나','1234','아무나1','일단틀어');
+insert into board_table(boardWriter, boardPass, boardTitle, boardContents) value('아무나','1234','아무나1','일단틀어');
 select * from board_table;
 ```
 ### Class HomeController , BoardService ,BoardRepository,BoardDTO
@@ -22,16 +24,7 @@ select * from board_table;
 
 ## 52일차
 ### ing
-```sql
-drop table if exists board_file_table;
-create table board_file_table(
-id bigint primary key auto_increment,
-originalFileName varchar(100),
-storedFileName varchar(100),
-boardId bigint,
-constraint fk_board_file foreign key (boardId) references board_table(id)
-);
-```
+
 ### 조회수 증가 만듬 detail
 ### 파일 함께 보내기
 ```Html
@@ -42,25 +35,14 @@ constraint fk_board_file foreign key (boardId) references board_table(id)
 ```
 ####  enctype="multipart/form-data" 을 꼭붙여주어야합니다
 
-```DTO
-public class BoardDTO {
-    Long id;
-    String boardWriter;
-    String boardPass;
-    String boardTitle;
-    String boardContents;
-    Timestamp boardCreateDate;
-    int boardHits = 0;
-    MultipartFile boardFile;
-}
-```
 ```sql
 drop table if exists board_file_table;
-create table board_file_table(
-    id bigint primary key auto_increment,
+create table board_file_table
+(
+    id               bigint primary key auto_increment,
     originalFileName varchar(100),
-    storedFileName varchar(100),
-    boardId bigint,
+    storedFileName   varchar(100),
+    boardId          bigint,
     constraint fk_board_file foreign key (boardId) references board_table (id) on delete cascade
 );
 select * from board_file_table;
