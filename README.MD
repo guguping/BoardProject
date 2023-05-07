@@ -54,3 +54,5 @@ keyProperty="id" = 해당 컬럼 이름
 
 #### BoardSave메소드 전체 수정 Controller , Service , Repository , Mapper , mybatis
 #### 전체 싹다 수정함
+
+## ck에디터 적용 save

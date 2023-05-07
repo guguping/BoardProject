@@ -10,6 +10,7 @@
 <head>
     <title>boardSave</title>
     <link rel="stylesheet" href="/resources/css/style.css">
+    <script src="//cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
 </head>
 <body>
 <%@include file="../component/header.jsp" %>
@@ -26,13 +27,14 @@
                         <input type="text" id="boardPass" name="boardPass"></th>
                     <th><label for="boardTitle">글제목</label>
                         <input type="text" id="boardTitle" name="boardTitle"></th>
+                </tr>
                 <tr>
-                    <th colspan="6"><label for="boardContents">내용</label>
+                    <th colspan="6"><label for="editor1">내용</label>
                         <label for="boardFile" style="float: right">업로드</label>
                         <input type="file" id="boardFile" name="boardFile" multiple style="display: none"></th>
                 </tr>
                 <tr>
-                    <td colspan="6"><textarea id="boardContents" name="boardContents" COLS="104" ROWS="40"></textarea>
+                    <td colspan="6"><textarea id="editor1" name="boardContents" COLS="104" ROWS="40"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -48,6 +50,7 @@
 <%@include file="../component/footer.jsp" %>
 </body>
 <script>
+    CKEDITOR.replace('editor1');
     const goindex = () => {
         location.href = "/";
     }
