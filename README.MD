@@ -55,4 +55,12 @@ keyProperty="id" = 해당 컬럼 이름
 #### BoardSave메소드 전체 수정 Controller , Service , Repository , Mapper , mybatis
 #### 전체 싹다 수정함
 
-## ck에디터 적용 save
+### ck에디터 적용 save
+
+## day 53 - 코멘트기능
+### jquery 사용했음 , 모멘트 라이브러리 사용했음
+```javascript
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+```
+

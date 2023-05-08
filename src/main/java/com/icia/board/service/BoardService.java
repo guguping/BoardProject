@@ -54,9 +54,9 @@ public class BoardService {
                 // 매개변수 DTO가 아닌 리턴받은 dto를 사용해야함
                 //로컬에 파일 저장
                 // 저장할 경로 설정(저장할폴더 + 저장할이름)
-                String savePath = "C:\\Users\\LEE HOSEOP\\Desktop\\DATE\\Spring\\board\\springframework_img\\" + storedFileName;
+//                String savePath = "C:\\Users\\LEE HOSEOP\\Desktop\\DATE\\Spring\\board\\springframework_img\\" + storedFileName;
                 // 학원 경로
-//                String savePath = "D:\\springframework_img\\" + storedFileName;
+                String savePath = "D:\\springframework_img\\" + storedFileName;
                 // 저장처리
                 boardFile.transferTo(new File(savePath)); // new File()은 자바에서 제공하는 클래스
                 boardRepository.saveFile(boardFileDTO);
