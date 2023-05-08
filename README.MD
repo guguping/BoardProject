@@ -58,6 +58,19 @@ keyProperty="id" = 해당 컬럼 이름
 ### ck에디터 적용 save
 
 ## day 53 - 코멘트기능
+```sql
+drop table if exists comment_table;
+create table comment_table(
+id bigint primary key auto_increment,
+commentWriter varchar(50),
+commentContents varchar(500),
+boardId bigint,
+commentCreatedDate datetime default now(),
+constraint fk_comment foreign key (boardId) references board_table(id) on delete cascade
+);
+
+select * from comment_table;
+```
 ### jquery 사용했음 , 모멘트 라이브러리 사용했음
 ```javascript
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
