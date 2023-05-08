@@ -64,3 +64,14 @@ keyProperty="id" = 해당 컬럼 이름
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 ```
 
+## 페이징처리
+``` sql
+-- 페이징 처리를 위한 쿼리문
+-- 한페이지에 게시글 10개씩
+select * from board_table order by id asc limit 0,9;
+select * from board_table order by id asc limit 9,9;
+select * from board_table order by id asc limit 18,9;
+select * from board_table order by id asc limit 27,9;
+select * from board_table order by id asc limit 36,9;
+```
+#### boardSerivce의 pagingList 참고 sql문법

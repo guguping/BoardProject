@@ -22,6 +22,7 @@
 <%@include file="../component/nav.jsp" %>
 <section>
     <table>
+        <thead>
         <tr>
             <th colspan="6">제목</th>
         </tr>
@@ -61,8 +62,17 @@
                                       COLS="104" ROWS="38" readonly>${boardDTO.boardContents}</textarea></td>
         </tr>
         <tr>
+            <th colspan="6">
+                <input type="button" value="수정" onclick="goUpdate(${boardDTO.id})">
+                <input type="button" value="삭제" onclick="goDelete(${boardDTO.id})">
+                <input type="button" value="뒤로" onclick="goList()">
+            </th>
+        </tr>
+        <tr>
             <th colspan="6">댓글</th>
         </tr>
+        </thead>
+        <tbody id="commentResult">
         <c:choose>
             <c:when test="${cList == null}">
                 <tr>
@@ -80,36 +90,30 @@
                 </tr>
                 <c:forEach items="${cList}" var="cList">
                     <tr>
-                        <td>${cList.id}</td>
-                        <td>${cList.commentWriter}</td>
-                        <td>${cList.commentContents}</td>
-                        <td>
+                        <th>${cList.id}</th>
+                        <th>${cList.commentWriter}</th>
+                        <th>${cList.commentContents}</th>
+                        <th>
                             <fmt:formatDate value="${cList.commentCreatedDate}"
                                             pattern="yyyy-MM-dd HH:mm"></fmt:formatDate>
-                        </td>
+                        </th>
                     </tr>
                 </c:forEach>
             </c:otherwise>
         </c:choose>
-        <tr id="commentResult">
-
-        </tr>
+        </tbody>
+        <tfoot>
         <tr>
             <th colspan="6"><label for="commentWriter" style="float: left">작성자: </label>
                 <input type="text" name="commentWriter" id="commentWriter" style="float: left">
                 <label for="commentContents" style="margin-right: 187px">내용</label>
-                <input type="button" value="등록" style="float: right" onclick="helloComment(${boardDTO.id})"></th>
+                <input type="button" value="등록" style="float: right" onclick="helloComment(${boardDTO.id})">
+            </th>
         </tr>
         <tr>
             <td colspan="6"><textarea id="commentContents" COLS="104" ROWS="5"></textarea></td>
         </tr>
-        <tr>
-            <th colspan="6">
-                <input type="button" value="수정" onclick="goUpdate(${boardDTO.id})">
-                <input type="button" value="삭제" onclick="goDelete(${boardDTO.id})">
-                <input type="button" value="뒤로" onclick="goList()">
-            </th>
-        </tr>
+        </tfoot>
     </table>
 </section>
 <%@include file="../component/footer.jsp" %>
@@ -139,16 +143,23 @@
                 "boardId": boardId
             },
             success: function (res) {
-                let output;
+                let output = "<tr>";
+                output += "<th>id</th>";
+                output += "<th>작성자</th>";
+                output += "<th>내용</th>";
+                output += "<th>작성시간</th>";
+                output += "</tr>";
                 for (let i in res) {
-                    output += "<td>" + res[i].id + "</td>";
-                    output += "<td>" + res[i].commentWriter + "</td>";
-                    output += "<td>" + res[i].commentContents + "</td>";
-                    output += "<td>" + moment(res[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss") + "</td>";
+                    output += "<tr>";
+                    output += "<th>" + res[i].id + "</th>";
+                    output += "<th>" + res[i].commentWriter + "</th>";
+                    output += "<th>" + res[i].commentContents + "</th>";
+                    output += "<th>" + moment(res[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss") + "</th>";
+                    output += "</tr>";
                 }
                 commentResult.innerHTML = output;
-                document.getElementById('commentWriter').innerHTML = "";
-                document.getElementById('commentContents').innerHTML = "";
+                document.getElementById('commentWriter').value = "";
+                document.getElementById('commentContents').value = "";
             },
             error: function () {
                 console.log("실패");

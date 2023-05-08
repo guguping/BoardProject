@@ -10,6 +10,7 @@
 <head>
     <title>boardUpdate</title>
     <link rel="stylesheet" href="/resources/css/style.css">
+    <script src="//cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
 </head>
 <body>
 <%@include file="../component/header.jsp" %>
@@ -36,7 +37,7 @@
                 <th>${boardDTO.boardHits}</th>
             </tr>
             <tr>
-                <td colspan="6"><textarea name="boardContents"
+                <td colspan="6"><textarea name="boardContents" id="editor1"
                                           COLS="104" ROWS="38">${boardDTO.boardContents}</textarea></td>
             </tr>
             <tr>
@@ -65,5 +66,6 @@
         updateForm.submit();
     }
     })
+    CKEDITOR.replace('editor1');
 </script>
 </html>

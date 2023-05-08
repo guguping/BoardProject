@@ -41,10 +41,16 @@
     select * from board_table where boardContents like concat('%',#{boardContents},'%')
 </select>
 <select id="boardComment" parameterType="Long" resultType="comment">
-    select * from comment_table where boardId = #{id} order by id desc
+    select * from comment_table where boardId = #{id} order by id asc
 </select>
 <insert id="commentSave" parameterType="comment">
     insert into comment_table(commentWriter,commentContents,boardId)
         values (#{commentWriter},#{commentContents},#{boardId})
 </insert>
+    <select id="paging" parameterType="java.util.HashMap" resultType="board">
+        select * from board_table order by id asc limit #{start},#{limit}
+    </select>
+    <select id="count" resultType="Integer">
+        select count(id) from board_table
+    </select>
 </mapper>
