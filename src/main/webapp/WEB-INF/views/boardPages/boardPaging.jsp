@@ -19,6 +19,7 @@
 <%@include file="../component/nav.jsp" %>
 <section>
     <div>
+        <h2 style="text-align: center">boardPagingList</h2>
         <table class="table table-striped table-hover text-center">
             <thead>
             <tr>
@@ -56,40 +57,40 @@
             </thead>
             <tbody>
             <tr>
-                <c:choose>
+                <th colspan="5" style="padding: 5px"><c:choose>
                     <%-- 현재 페이지가 1페이지면 이전 글자만 보여줌 --%>
                     <c:when test="${paging.page<=1}">
-                        <th><a class="page-link" style="text-decoration: none;color: grey">[이전]</a></th>
+                        <a class="page-link" style="text-decoration: none;color: grey">[이전]</a>
                     </c:when>
                     <%-- 1페이지가 아닌 경우에는 [이전]을 클릭하면 현재 페이지보다 1 작은 페이지 요청 --%>
                     <c:otherwise>
-                        <th><a class="page-link" href="/board/paging?page=${paging.page-1}"
-                               style="text-decoration: none;color: black">[이전]</a></th>
+                        <a class="page-link" href="/board/paging?page=${paging.page-1}"
+                           style="text-decoration: none;color: black">[이전]</a>
                     </c:otherwise>
                 </c:choose>
-                <%--  for(int i=startPage; i<=endPage; i++)      --%>
-                <th colspan="3"><c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+                    <%--  for(int i=startPage; i<=endPage; i++)      --%>
+                    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+                        <c:choose>
+                            <%-- 요청한 페이지에 있는 경우 현재 페이지 번호는 텍스트만 보이게 --%>
+                            <%--                    eq == && --%>
+                            <c:when test="${i eq paging.page}">
+                                <a class="page-link" style="text-decoration: none;color: violet">${i}</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="page-link" href="/board/paging?page=${i}"
+                                   style="text-decoration: none;color: black">${i}</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
                     <c:choose>
-                        <%-- 요청한 페이지에 있는 경우 현재 페이지 번호는 텍스트만 보이게 --%>
-                        <%--                    eq == && --%>
-                        <c:when test="${i eq paging.page}">
-                            <a class="page-link" style="text-decoration: none;color: violet">${i}</a>
+                        <c:when test="${paging.page>=paging.maxPage}">
+                            <a class="page-link" style="text-decoration: none;color: grey">[다음]</a>
                         </c:when>
                         <c:otherwise>
-                            <a class="page-link" href="/board/paging?page=${i}"
-                               style="text-decoration: none;color: black">${i}</a>
+                            <a class="page-link" href="/board/paging?page=${paging.page+1}"
+                               style="text-decoration: none;color: black">[다음]</a>
                         </c:otherwise>
-                    </c:choose>
-                </c:forEach></th>
-                <c:choose>
-                    <c:when test="${paging.page>=paging.maxPage}">
-                        <th><a class="page-link" style="text-decoration: none;color: grey">[다음]</a></th>
-                    </c:when>
-                    <c:otherwise>
-                        <th><a class="page-link" href="/board/paging?page=${paging.page+1}"
-                               style="text-decoration: none;color: black">[다음]</a></th>
-                    </c:otherwise>
-                </c:choose>
+                    </c:choose></th>
             </tr>
             </tbody>
         </table>
