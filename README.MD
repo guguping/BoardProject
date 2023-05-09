@@ -88,3 +88,19 @@ select * from board_table order by id asc limit 27,9;
 select * from board_table order by id asc limit 36,9;
 ```
 #### boardSerivce의 pagingList 참고 sql문법
+
+## day 54 - 검색, 검색결과 페이징
+### boardPaging부터 시작함
+
+```sql
+
+select * from board_table where boardTitle like '%아%' order by id asc limit 0,3;
+MySQL에서는 like연산자를 사용할때 '%아%'를 사용했지만
+
+select count(id) from board_table where boardTitle like concat('%', #{q}, '%')
+Mapper에서 사용을 할때 '%아%'로 작성하면 잘 작동하지 않기 때문에
+ concat을 사용하여 concat('%', #{q}, '%')이런 식으로 붙여 사용한다
+
+
+```
+
