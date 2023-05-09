@@ -42,7 +42,10 @@ public class BoardController {
     }
 
     @GetMapping
-    public String boardDetail(@RequestParam("id") Long id, Model model, HttpSession session) {
+    public String boardDetail(@RequestParam("id") Long id, Model model,
+                              @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                              @RequestParam(value = "q", required = false, defaultValue = "") String q,
+                              @RequestParam(value = "type", required = false, defaultValue = "boardTitle") String type) {
         boardService.updateHits(id);
         BoardDTO boardDTO = boardService.boardDetail(id);
         if (boardDTO.getFileAttached() == 1) {
@@ -57,6 +60,9 @@ public class BoardController {
             model.addAttribute("cList", cList);
         }
         model.addAttribute("boardDTO", boardDTO);
+        model.addAttribute("page",page);
+        model.addAttribute("q",q);
+        model.addAttribute("type",type);
         return "boardPages/boardDetail";
     }
 
@@ -130,7 +136,7 @@ public class BoardController {
     @GetMapping("/paging")
     public String paging(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
                          @RequestParam(value = "q", required = false, defaultValue = "") String q,
-                         @RequestParam(value = "type", required = false, defaultValue = "") String type,
+                         @RequestParam(value = "type", required = false, defaultValue = "boardTitle") String type,
                          Model model) {
         System.out.println("page = " + page + ", q = " + q);
         List<BoardDTO> boardDTOList = null;

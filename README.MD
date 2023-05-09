@@ -93,7 +93,6 @@ select * from board_table order by id asc limit 36,9;
 ### boardPaging부터 시작함
 
 ```sql
-
 select * from board_table where boardTitle like '%아%' order by id asc limit 0,3;
 MySQL에서는 like연산자를 사용할때 '%아%'를 사용했지만
 
@@ -101,6 +100,13 @@ select count(id) from board_table where boardTitle like concat('%', #{q}, '%')
 Mapper에서 사용을 할때 '%아%'로 작성하면 잘 작동하지 않기 때문에
  concat을 사용하여 concat('%', #{q}, '%')이런 식으로 붙여 사용한다
 
-
 ```
 
+
+```sql
+    <select id="searchCount" parameterType="java.util.HashMap" resultType="Integer">
+        select count(id) from board_table where ${tpye} like concat('%', #{q}, '%')
+                            마이바티스 문법 컬럼 부분이 변해야하는 경우 ${} 사용가능
+                        원래는 case를 사용하였지만 이게 더 가독성이 좋고 편하기에 이걸 사용
+    </select>
+```

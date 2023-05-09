@@ -153,8 +153,11 @@ public class BoardService {
     public PageDTO pagingSearchParam(int page,String type,String q) {
         int pageLimit = 9; // 한페이지에 보여줄 글 갯수
         int blockLimit = 3; // 하단에 보여줄 페이지 번호 갯수
+        Map<String, Object> pagingParams = new HashMap<>();
+        pagingParams.put("q", q);
+        pagingParams.put("type",type);
         // 전체 글 갯수 조회
-        int boardCount = boardRepository.boardSearchCount(q);
+        int boardCount = boardRepository.boardSearchCount(pagingParams);
         // 이부분은 전날의 페이징 count 메서드와 조금 기능이 다름 Mapper확인 필요
 
         // 전체 페이지 갯수 계산

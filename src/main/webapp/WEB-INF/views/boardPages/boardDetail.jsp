@@ -65,7 +65,7 @@
             <th colspan="6">
                 <input type="button" value="수정" onclick="goUpdate(${boardDTO.id})">
                 <input type="button" value="삭제" onclick="goDelete(${boardDTO.id})">
-                <input type="button" value="뒤로" onclick="goList()">
+                <input type="button" value="목록" onclick="goList()">
             </th>
         </tr>
         <tr>
@@ -126,8 +126,10 @@
         location.href = "/board/delete?id=" + id;
     }
     const goList = () => {
-        location.href = "/board/";
-
+        const type = '${type}';
+        const q = '${q}';
+        const page = '${page}';
+        location.href = "/board/paging?page="+page +"&type="+type + "&q=" +q;
     }
     const helloComment = (id) => {
         const commentWriter = document.getElementById('commentWriter').value;
